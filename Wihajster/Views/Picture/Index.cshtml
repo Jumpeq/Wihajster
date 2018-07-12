@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Wihajster.Models.Picture>
+
+@{
+    ViewBag.Title = "Galeria";
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="" />
+                <h4 align="right">@Html.ActionLink("Szczegóły...", "Details", new { id = item.PictureId }, new { @class = "btn btn-info" })</h4>
+            </div>
+        </div>
+    }
+</div>
+

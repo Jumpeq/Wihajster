@@ -1,0 +1,73 @@
+﻿@model Wihajster.Models.Category
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Kategoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            Nazwa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Zdjęcie główne
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(modelItem => modelItem.MainPicture)" style="width: 256px; height: 256px;" alt="" />
+        </dd>
+
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prize)
+        </dd>
+        <dt>
+            Zdjęcia
+        </dt>
+        <dd>
+            <div class="row">
+                @foreach (var item in Model.Pictures)
+                {
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">
+                            <h4 align="center">@Html.DisplayFor(modelItem => item.Name)</h4>
+                            <img src="@Html.DisplayFor(modelItem => item.ImageUrl)" alt="" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.CategoryId }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Usuń", "Delete", new { id = Model.CategoryId }, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-primary" })
+</p>

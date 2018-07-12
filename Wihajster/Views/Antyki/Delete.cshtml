@@ -1,0 +1,62 @@
+﻿@model Wihajster.Models.Category
+
+@{
+    ViewBag.Title = "Usuń";
+}
+
+<p class="error">@ViewBag.ErrorMessage</p>
+<h3>Czy jesteś pewien, że chcesz usunąć ten wpis?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Kategoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+
+        <dt>
+            Nazwa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Zdjęcie główne
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(modelItem => modelItem.MainPicture)" style="width: 256px; height: 256px;" alt="" />
+        </dd>
+
+        <dt>
+            Opis
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prize)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń" class="btn btn-danger" /> 
+            @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    }
+</div>

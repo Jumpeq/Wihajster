@@ -1,0 +1,44 @@
+﻿@model Wihajster.Models.Picture
+
+@{
+    ViewBag.Title = "Usuń";
+}
+<h3>Czy jesteś pewien, że chcesz usunąć ten wpis?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nazwa kategorii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            Nazwa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Zdjęcie
+        </dt>
+
+        <dd>
+            <img src="@Html.DisplayFor(modelItem => Model.ImageUrl)" style="width: 128px; height: 128px;" alt="" />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        @Html.ActionLink("Powrót do listy", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+    }
+</div>

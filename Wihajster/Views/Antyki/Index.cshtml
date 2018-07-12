@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Wihajster.Models.Category>
+
+@{
+    ViewBag.Title = "Antyki";
+}
+
+<p>
+    @Html.ActionLink("Stwórz", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        if (item.CategoryName == "Antyki")
+        {
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="@Html.DisplayFor(modelItem => item.MainPicture)" style="width: 256px; height: 256px;" alt=""/>
+                    <div class="row col-lg12">
+                        <div class="col-lg-6">
+                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                            <h4>Cena: @Html.DisplayFor(modelItem => item.Prize) zł</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4 align="right">@Html.ActionLink("Szczegóły...", "Details", new {id = item.CategoryId}, new {@class = "btn btn-info"})</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
