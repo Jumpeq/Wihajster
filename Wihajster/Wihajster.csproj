@@ -261,7 +261,11 @@
     <Content Include="Views\Picture\Details.cshtml" />
     <Content Include="Views\Picture\Edit.cshtml" />
     <Content Include="Views\Picture\Index.cshtml" />
-    <Content Include="Views\Picture\CreateMany.cshtml" />
+    <Content Include="Views\Category\CreateMany.cshtml" />
+    <Content Include="Views\Antyki\CreateMany.cshtml" />
+    <Content Include="Views\Bibeloty\CreateMany.cshtml" />
+    <Content Include="Views\Meble\CreateMany.cshtml" />
+    <Content Include="Views\Oświetlenie\CreateMany.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -36,6 +36,11 @@ namespace Wihajster.Controllers
             return View(category);
         }
 
+        public ActionResult CreateMany()
+        {
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId");
+            return View();
+        }
         // GET: Category/Create
         public ActionResult Create()
         {
