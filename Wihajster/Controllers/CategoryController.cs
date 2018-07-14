@@ -16,7 +16,7 @@ namespace Wihajster.Controllers
         private WihajsterDbContext db = new WihajsterDbContext();
 
         // GET: Category
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
             return View(db.Categories.ToList());
         }
@@ -39,6 +39,29 @@ namespace Wihajster.Controllers
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId");
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateMany([Bind(Include = "PictureId,Name,ImageUrl,CategoryId")] Picture picture)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Pictures.Add(picture);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Category");
+                }
+            }
+            catch (DataException)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("",
+                    "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId", picture.CategoryId);
+            return View(picture);
         }
 
         // GET: Category/Create
@@ -103,7 +126,7 @@ namespace Wihajster.Controllers
 
             var categoryToUpdate = db.Categories.Find(id);
             if (TryUpdateModel(categoryToUpdate, "",
-                new string[] {"CategoryName", "Description", "Prize","Name", "MainPicture" }))
+                new string[] { "CategoryName", "Description", "Prize", "Name", "MainPicture" }))
             {
                 try
                 {
@@ -148,10 +171,10 @@ namespace Wihajster.Controllers
             try
             {
 
-            
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
-            db.SaveChanges();
+
+                Category category = db.Categories.Find(id);
+                db.Categories.Remove(category);
+                db.SaveChanges();
             }
             catch (DataException/* dex */)
             {

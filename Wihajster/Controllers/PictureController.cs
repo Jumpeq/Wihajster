@@ -44,30 +44,6 @@ namespace Wihajster.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CreateMany([Bind(Include = "PictureId,Name,ImageUrl,CategoryId")] Picture picture)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    db.Pictures.Add(picture);
-                    db.SaveChanges();
-                    return RedirectToAction("Index","Category");
-                }
-            }
-            catch (DataException)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("",
-                    "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
-
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId", picture.CategoryId);
-            return View(picture);
-        }
-
         // POST: Picture/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

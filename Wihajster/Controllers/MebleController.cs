@@ -40,6 +40,29 @@ namespace Wihajster.Controllers
             ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId");
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateMany([Bind(Include = "PictureId,Name,ImageUrl,CategoryId")] Picture picture)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Pictures.Add(picture);
+                    db.SaveChanges();
+                    return RedirectToAction("Index", "Category");
+                }
+            }
+            catch (DataException)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("",
+                    "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+            }
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "CategoryId", picture.CategoryId);
+            return View(picture);
+        }
 
         // GET: Category/Create
         public ActionResult Create()
